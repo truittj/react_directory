@@ -3,6 +3,7 @@ import EmployeeCard from "./components/EmployeeCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import employees from "./employees.json";
+import Form from "./components/Form"
 
 class App extends Component {
   state = {
@@ -17,7 +18,8 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Employees List</Title>
+        <Title>Employees Directory</Title>
+        <Form />
         {this.state.employees.map(employee => (
           <EmployeeCard
             removeEmployee={this.removeEmployee}
