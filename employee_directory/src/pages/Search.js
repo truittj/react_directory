@@ -10,11 +10,11 @@ import API from "../utils/API";
 class Search extends Component {
   state = {
     result: [],
-    search: ""
+    search: "",
+    order: "descend"
   };
 
   componentDidMount() {
-    // this.searchEmployee();
     API.getEmployee()
     .then(res => this.setState({ result: res.data.results }))
     .catch(err => console.log(err));
@@ -26,7 +26,7 @@ class Search extends Component {
       .catch(err => console.log(err));
   };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
     this.setState({
@@ -34,8 +34,9 @@ class Search extends Component {
     });
   };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(e)
     this.searchEmployee(this.state.search);
   };
 
@@ -43,14 +44,16 @@ class Search extends Component {
     return (
       <Container>
         <Row>
-          <Col size="md-8">
+          <Col size="md">
               <SearchForm
                 value={this.state.search}
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
               />
           </Col>
-          <Col size="md-4">
+        </Row>
+        <Row>
+          <Col size="md">
            <SearchResults 
            result={this.state.result} />
           </Col>
