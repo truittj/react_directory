@@ -11,12 +11,15 @@ class Search extends Component {
   state = {
     result: [],
     search: "",
-    order: "descend"
+    order: "",
+    filterList: []
   };
 
   componentDidMount() {
     API.getEmployee()
-    .then(res => this.setState({ result: res.data.results }))
+    .then(res => this.setState({ 
+      result: res.data.results, 
+      filterList: res.data.results }))
     .catch(err => console.log(err));
   }
 
@@ -36,8 +39,7 @@ class Search extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(e)
-    this.searchEmployee(this.state.search);
+    this.filter(this.state.search);
   };
 
   render() {
