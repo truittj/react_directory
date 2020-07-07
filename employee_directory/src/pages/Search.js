@@ -3,12 +3,11 @@ import API from "../utils/API";
 import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
-import Alert from "../components/Alert";
 
 class Search extends Component {
   state = {
     search: "",
-    breeds: [],
+    employeeName: [],
     results: [],
     error: ""
   };
@@ -26,7 +25,7 @@ class Search extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    API.getDogsOfBreed(this.state.search)
+    API.getEmployee(this.state.search)
       .then(res => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
@@ -40,16 +39,10 @@ class Search extends Component {
       <div>
         <Container style={{ minHeight: "80%" }}>
           <h1 className="text-center">Search for an employee!</h1>
-          <Alert
-            type="danger"
-            style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
-          >
-            {this.state.error}
-          </Alert>
           <SearchForm
             handleFormSubmit={this.handleFormSubmit}
             handleInputChange={this.handleInputChange}
-            breeds={this.state.breeds}
+            employeeName={this.state.employeeName}
           />
           <SearchResults results={this.state.results} />
         </Container>
