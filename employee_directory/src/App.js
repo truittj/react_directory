@@ -1,39 +1,25 @@
-import React, { Component } from "react";
-import EmployeeCard from "./components/EmployeeCard";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import About from "./pages/About";
+import Search from "./pages/Search";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Wrapper from "./components/Wrapper";
-import Title from "./components/Title";
-import employees from "./employees.json";
-import Form from "./components/Form"
 
-class App extends Component {
-  state = {
-    employees
-  };
-
-  removeEmployee = id => {
-    const employees = this.employees.filter(employee => employee.id !== id);
-    this.setState({ employees });
-  };
-
-  render() {
-    return (
-      <Wrapper>
-        <Title>Employees Directory</Title>
-        <Form />
-        {this.state.employees.map(employee => (
-          <EmployeeCard
-            removeEmployee={this.removeEmployee}
-            id={employee.id}
-            key={employee.id}
-            name={employee.name}
-            image={employee.image}
-            position={employee.position}
-            contact={employee.contact}
-          />
-        ))}
-      </Wrapper>
-    );
-  }
+function App() {
+  return (
+    <Router>
+      <div>
+        <Navbar />
+        <Wrapper>
+          <Route exact path="/" component={About} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/employee_directory" component={Search} />
+        </Wrapper>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
