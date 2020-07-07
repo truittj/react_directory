@@ -1,45 +1,66 @@
-import React, { useState, useEffect } from "react";	
-import API from "../utils/API";
+import React, { Component } from "react";
 import Container from "../components/Container";
+import Row from "../components/Row";
+import Col from "../components/Col";
+import SearchForm from "../components/SearchForm";
+import SearchResults from "../components/SearchResults";
 
+import API from "../utils/API";
 
-const Search = () => {
-  const [developerState, setDeveloperState] = useState({
-      users: [],
-      order: "descend",
-      filteredUsers: [],
-      headings: [
-          { name: "Image", width: "10%", order: "descend" },
-          { name: "name", width: "10%", order: "descend" },
-          { name: "phone", width: "20%", order: "descend" },
-          { name: "email", width: "20%", order: "descend" },
-          { name: "dob", width: "10%", order: "descend" }
-          ]
-      });
+class Search extends Component {
+  state = {
+    result: [],
+    search: ""
+  };
 
-      useEffect(() => {
-        API.getUsers().then(results => {
-        console.log(results.data.results);
-    setDeveloperState({
-        ...developerState, 
-        users: results.data.results,
-        filteredUsers: results.data.results
-            });
-        });
-	}, []);
+  componentDidMount() {
+    // this.searchEmployee();
+    API.getEmployee()
+    .then(res => this.setState({ result: res.data.results }))
+    .catch(err => console.log(err));
+  }
+
+  searchEmployee = () => {
+    API.getEmployee()
+      .then(res => this.setState({ result: res.data.results }))
+      .catch(err => console.log(err));
+  };
+
+  // handleInputChange = event => {
+  //   const value = event.target.value;
+  //   const name = event.target.name;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // };
+
+  // When the form is submitted, search the OMDB API for the value of `this.state.search`
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   this.searchMovies(this.state.search);
+  // };
+
+  render() {
     return (
-      <div>
-        <Container style={{ minHeight: "80%" }}>
-          <h1 className="text-center">Search for an employee!</h1>
-          <SearchForm
-            handleFormSubmit={this.handleFormSubmit}
-            handleInputChange={this.handleInputChange}
-            employeeName={this.state.employeeName}
-          />
-          <SearchResults results={this.state.results} />
-        </Container>
-      </div>
+      <Container>
+        <Row>
+          <Col size="md-8">
+            
+          </Col>
+          <Col size="md-4">
+            
+              {/* <SearchForm
+                value={this.state.search}
+                handleInputChange={this.handleInputChange}
+                handleFormSubmit={this.handleFormSubmit}
+              /> */}
+           <SearchResults 
+           result={this.state.result} />
+          </Col>
+        </Row>
+      </Container>
     );
   }
+}
 
 export default Search;
