@@ -2,7 +2,7 @@ ul.search-results img {
   margin: 0 auto;
 }
 
-li {
+li.list-group-item {
   margin: 10px;
   box-shadow: 3px 3px 5px grey;
 }

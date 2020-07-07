@@ -26,34 +26,31 @@ class Search extends Component {
       .catch(err => console.log(err));
   };
 
-  // handleInputChange = event => {
-  //   const value = event.target.value;
-  //   const name = event.target.name;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
+  handleInputChange = event => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value
+    });
+  };
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   this.searchMovies(this.state.search);
-  // };
+  handleFormSubmit = event => {
+    event.preventDefault();
+    this.searchEmployee(this.state.search);
+  };
 
   render() {
     return (
       <Container>
         <Row>
           <Col size="md-8">
-            
-          </Col>
-          <Col size="md-4">
-            
-              {/* <SearchForm
+              <SearchForm
                 value={this.state.search}
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
-              /> */}
+              />
+          </Col>
+          <Col size="md-4">
            <SearchResults 
            result={this.state.result} />
           </Col>

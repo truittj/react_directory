@@ -14,14 +14,9 @@ function SearchForm(props) {
           list="names"
           type="text"
           className="form-control"
-          placeholder="Type in a dog breed to begin"
+          placeholder="Employee Name"
           id="name"
         />
-        <datalist id="names">
-          {props.value.map(res => (
-            <option value={res} key={res.registered.date} />
-          ))}
-        </datalist>
         <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
           Search
         </button>
