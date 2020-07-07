@@ -1,40 +1,32 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";	
 import API from "../utils/API";
 import Container from "../components/Container";
-import SearchForm from "../components/SearchForm";
-import SearchResults from "../components/SearchResults";
 
-class Search extends Component {
-  state = {
-    search: "",
-    employeeName: [],
-    results: [],
-    error: ""
-  };
 
-  // When the component mounts, get a list of all available base breeds and update this.state.breeds
-  componentDidMount() {
-    API.getBaseBreedsList()
-      .then(res => this.setState({ breeds: res.data.message }))
-      .catch(err => console.log(err));
-  }
+const Search = () => {
+  const [developerState, setDeveloperState] = useState({
+      users: [],
+      order: "descend",
+      filteredUsers: [],
+      headings: [
+          { name: "Image", width: "10%", order: "descend" },
+          { name: "name", width: "10%", order: "descend" },
+          { name: "phone", width: "20%", order: "descend" },
+          { name: "email", width: "20%", order: "descend" },
+          { name: "dob", width: "10%", order: "descend" }
+          ]
+      });
 
-  handleInputChange = event => {
-    this.setState({ search: event.target.value });
-  };
-
-  handleFormSubmit = event => {
-    event.preventDefault();
-    API.getEmployee(this.state.search)
-      .then(res => {
-        if (res.data.status === "error") {
-          throw new Error(res.data.message);
-        }
-        this.setState({ results: res.data.message, error: "" });
-      })
-      .catch(err => this.setState({ error: err.message }));
-  };
-  render() {
+      useEffect(() => {
+        API.getUsers().then(results => {
+        console.log(results.data.results);
+    setDeveloperState({
+        ...developerState, 
+        users: results.data.results,
+        filteredUsers: results.data.results
+            });
+        });
+	}, []);
     return (
       <div>
         <Container style={{ minHeight: "80%" }}>
@@ -49,6 +41,5 @@ class Search extends Component {
       </div>
     );
   }
-}
 
 export default Search;
