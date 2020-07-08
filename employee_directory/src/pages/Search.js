@@ -90,7 +90,8 @@ employeeSearch = () => {
           <Col size="md">
            <SearchResults 
            //result={this.state.result}
-           result={this.state.filterList} />
+           result={this.state.filterList}
+           sortByName={this.sortByName} />
           </Col>
         </Row>
       </Container>
