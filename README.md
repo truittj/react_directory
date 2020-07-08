@@ -1,6 +1,6 @@
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
-![Badge](https://img.shields.io/badge/React%Employee%Directory-v1.0-red)
+![Badge](https://img.shields.io/badge/React%20Employee%20Directory-v1.0-red)
 # React_Employee_Directory
 
 ## Description
