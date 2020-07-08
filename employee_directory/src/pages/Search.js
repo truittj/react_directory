@@ -34,10 +34,8 @@ class Search extends Component {
             order: "desc"
         })
     } else {
-
         const sortList = list.sort((a, b) => (a.name.first > b.name.first) ? -1 : 1)
         console.log(sortList)
-
         this.setState({
             filterList: sortList,
             order: "asc"
@@ -46,30 +44,35 @@ class Search extends Component {
 }
 
   handleInputChange = (event) => {
-    this.setState({ search: event.target.value });
-  };
+    const result = this.state.result;
+    const UserInput = event.target.value;
+    const filterList = result.filter(employee => employee.name.first.toLowerCase().indexOf(UserInput.toLowerCase()) > -1
+    )
+    this.setState({
+      filterList
+    });
+};
 
-  filterEmployees = (searchkey) => {
-    var filterResult = this.state.result.filter(person => person.name === searchkey)
-    this.setState({ result:filterResult })  
-  console.log(filterResult)
-  }
+employeeSearch = () => {
+  API.getEmployee()
+      .then(res => this.setState({
+          filterList: res.data.results,
+          result: res.data.results
+      }))
+      .catch(err => console.log(err))
+}
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const searchBar = this.state.search
-    let filterResult = searchBar.filter(filterList => filterList.name === searchBar)
-    this.setState(filterResult)
-    console.log(filterResult)
-    
-      // .then(res => {
-      //   if (res.data.status === "error") {
-      //     throw new Error(res.data.message);
-      //   }
-      //   this.setState({ results: res.data.message, error: "" });
-      // })
-      // .catch(err => this.setState({ error: err.message }));
-  };
+    if (!this.state.search) {
+      alert("Enter a name")
+      }
+  const { result, search } = this.state;
+  const filterList = result.filter(employee => employee.name.first.toLowerCase().includes(search.toLowerCase()));
+  this.setState({
+      filterList
+  });
+}
 
   render() {
     return (
@@ -86,7 +89,8 @@ class Search extends Component {
         <Row>
           <Col size="md">
            <SearchResults 
-           result={this.state.result} />
+           //result={this.state.result}
+           result={this.state.filterList} />
           </Col>
         </Row>
       </Container>
