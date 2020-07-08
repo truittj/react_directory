@@ -6,6 +6,10 @@ form.search button[type="submit"] {
   float: right;
   margin-top: 10px;
 }
-input {
-  margin-top: 20px;
+
+.btn-outline-dark {
+  margin-top: 10px;
+}
+label {
+  margin-top: 10px;
 }

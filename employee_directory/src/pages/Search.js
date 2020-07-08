@@ -83,6 +83,7 @@ employeeSearch = () => {
                 value={this.state.search}
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
+                sortByName={this.sortByName}
               />
           </Col>
         </Row>
@@ -91,7 +92,7 @@ employeeSearch = () => {
            <SearchResults 
            //result={this.state.result}
            result={this.state.filterList}
-           sortByName={this.sortByName} />
+            />
           </Col>
         </Row>
       </Container>

@@ -13,11 +13,14 @@ function SearchForm(props) {
           name="employee"
           type="text"
           className="form-control"
-          placeholder="Employee Name"
+          placeholder="Employee First Name"
           id="employee"
         />
-        <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+        <button type="submit" onClick={props.handleFormSubmit} className="btn btn-dark">
           Search
+        </button>
+        <button type="button" onClick={props.sortByName} className="btn btn-outline-dark">
+          Sort by Employee First Name
         </button>
       </div>
     </form>
