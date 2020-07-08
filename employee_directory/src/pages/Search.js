@@ -23,23 +23,52 @@ class Search extends Component {
     .catch(err => console.log(err));
   }
 
-  searchEmployee = () => {
-    API.getEmployee()
-      .then(res => this.setState({ result: res.data.results }))
-      .catch(err => console.log(err));
-  };
+  sortByName = () => {
+    const list = this.state.filterList;
+    if (this.state.order === "asc") {
+        const sortList = list.sort((a, b) => (a.name.first > b.name.first) ? 1 : -1)
+        console.log(sortList)
+
+        this.setState({
+            filterList: sortList,
+            order: "desc"
+        })
+    } else {
+
+        const sortList = list.sort((a, b) => (a.name.first > b.name.first) ? -1 : 1)
+        console.log(sortList)
+
+        this.setState({
+            filterList: sortList,
+            order: "asc"
+        })
+    }
+}
 
   handleInputChange = (event) => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({
-      [name]: value
-    });
+    this.setState({ search: event.target.value });
   };
 
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    this.filter(this.state.search);
+  filterEmployees = (searchkey) => {
+    var filterResult = this.state.result.filter(person => person.name === searchkey)
+    this.setState({ result:filterResult })  
+  console.log(filterResult)
+  }
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    const searchBar = this.state.search
+    let filterResult = searchBar.filter(filterList => filterList.name === searchBar)
+    this.setState(filterResult)
+    console.log(filterResult)
+    
+      // .then(res => {
+      //   if (res.data.status === "error") {
+      //     throw new Error(res.data.message);
+      //   }
+      //   this.setState({ results: res.data.message, error: "" });
+      // })
+      // .catch(err => this.setState({ error: err.message }));
   };
 
   render() {
