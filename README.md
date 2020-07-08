@@ -41,6 +41,7 @@ v1.0
 ## Installation
 
 The user can deply the application at:
+
  https://truittj.github.io/react_directory/
 
 
